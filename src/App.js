@@ -9,7 +9,7 @@ function App() {
     <div>
       <Navbar />
       <ItemListContainer
-        greeting="Welcome from master! This
+        greeting="Welcome, this is a message from Branch5! This
           site is currently under contruction."
       />
     </div>

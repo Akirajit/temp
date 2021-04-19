@@ -1,23 +1,35 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./ItemListContainer.css";
+import ItemCount from "../components/ItemCount/ItemCount";
 
-export class ItemListContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function ItemListContainer({ greeting }) {
+  const [number, setNumber] = useState(0);
 
-  render() {
-    return (
-      <div>
-        <h3 className="title">{this.props.greeting}</h3>
-        <img
-          id="main-image"
-          src="https://sleekbundle.com/wp-content/uploads/2020/01/18-Site-under-construction-1.png"
-          alt="site-under-construction"
-        />
-      </div>
-    );
-  }
+  const decrement = () => {
+    if (number > 0) {
+      setNumber(number - 1);
+    }
+  };
+
+  const increment = () => {
+    setNumber(number + 1);
+  };
+
+  const onAdd = () => {
+    alert("testing");
+  };
+
+  return (
+    <div>
+      <h3 className="title">{greeting}</h3>
+      <ItemCount
+        initial={4}
+        stock={5}
+        decrement={decrement}
+        increment={increment}
+        number={number}
+        onAdd={onAdd}
+      />
+    </div>
+  );
 }
-
-export default ItemListContainer;

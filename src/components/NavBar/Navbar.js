@@ -1,5 +1,6 @@
 import React from "react";
-import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+
 import CartWidget from "../CartWidget/CartWidget";
 
 function Menu() {

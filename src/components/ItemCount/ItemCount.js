@@ -1,19 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import "./ItemCount.css";
 import Visualizer from "./Visualizer";
 
-export default function ItemCount({
-  initial,
-  stock,
-  decrement,
-  increment,
-  number,
-  onAdd,
-}) {
-  useEffect(() => {
-    number = initial;
-  }, []);
+export default function ItemCount({ initial, stock, onAdd }) {
+  const [counter, setCounter] = useState(initial);
+
+  const incrementCounter = () => {
+    setCounter(counter + 1);
+  };
+
+  const decrementCounter = () => {
+    if (counter > 1) {
+      setCounter(counter - 1);
+    }
+  };
 
   return (
     <Container>
@@ -31,19 +32,23 @@ export default function ItemCount({
             hands
           </Card.Text>
           <div id="counterContainer">
-            <a href="#" id="counterContainerLeft" onClick={decrement}>
+            <a href="#" id="counterContainerLeft" onClick={decrementCounter}>
               -
             </a>
-            <Visualizer stock={stock} selectedNumber={number} />
-            <a
-              href="#"
-              id="counterContainerRight"
-              onClick={number < stock ? increment : null}
-            >
+            <Visualizer stock={stock} selectedNumber={counter} />
+            <a href="#" id="counterContainerRight" onClick={incrementCounter}>
               +
             </a>
           </div>
-          <Button id="addToCartBtn" variant="primary" onClick={onAdd}>
+          <Button
+            id="addToCartBtn"
+            variant="primary"
+            onClick={
+              counter <= stock
+                ? () => onAdd(counter)
+                : alert("please enter a less value")
+            }
+          >
             Add to cart
           </Button>
         </Card.Body>
